@@ -2,14 +2,16 @@
 
 # The Kconfig tool for the menu interface
 KCONFIG_MCONF ?= kconfig-mconf
-
 # The Kconfig file
 KCONFIG_FILE = Kconfig
+# Other Vars
+CURRENT_PATH := $(CURDIR)
 
 # Default target: build the Rust project
 all:
+	@mkdir output
 	@echo "Running Cargo build..."
-	@cd LunSystems && cargo build
+	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/Output/
 
 # Target to run the configuration menu
 menuconfig:
