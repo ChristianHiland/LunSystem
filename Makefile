@@ -9,7 +9,7 @@ KCONFIG_FILE = Kconfig
 # Default target: build the Rust project
 all:
 	@echo "Running Cargo build..."
-	@cargo build
+	@cd LunSystems && cargo build
 
 # Target to run the configuration menu
 menuconfig:
