@@ -6,19 +6,51 @@ KCONFIG_MCONF ?= kconfig-mconf
 KCONFIG_FILE = Kconfig
 # Other Vars
 CURRENT_PATH := $(CURDIR)
+# Define a variable to hold extra, conditional targets.
+EXTRA_TARGETS :=
+
+ifeq ($(HOWLING_INSTALL_COMPILE), y)
+	EXTRA_TARGETS += HowlingInstall
+endif
+
+ifeq ($(HOWLING_COMPILE), y)
+	EXTRA_TARGETS += Howling
+endif
+
+ifeq ($(LIB_HOWLING_COMPILE), y)
+	EXTRA_TARGETS += LibHowling
+endif
+
+ifeq ($(LIB_LUNTOOL_COMPILE), y)
+	EXTRA_TARGETS += LunTool
+endif
+
+EXTRA_TARGETS += LunSystems
 
 # Default target: build the Rust project
-all: 
+all: $(EXTRA_TARGETS)
 	@mkdir -p output/lib && mkdir -p output/bin
 	@echo "Running Cargo build..."
-	@echo "Compiling LunSystems"
-	@cd src/bin/LunSystems && cargo build && cp $(CURRENT_PATH)/src/bin/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/bin/
-	@cd src/lib/Howling && cargo build && cp $(CURRENT_PATH)/src/lib/Howling/target/debug/libHowling.* $(CURRENT_PATH)/output/lib/
-	ifeq ($(HOWLING_INSTALL_COMPILE), y)
-		@cd src/bin/Howling && cargo build && cp $(CURRENT_PATH)/src/bin/Howling/target/debug/Howling $(CURRENT_PATH)/output/bin/
-	endif
+	
+# LunSystem Targets
+Howling:
+	@echo "Compiling Howling"
+	@cd src/bin/Howling && cargo build && cp $(CURRENT_PATH)/src/bin/Howling/target/debug/Howling $(CURRENT_PATH)/output/bin/
+LunTool:
+	@echo "Compiling LunTool (Libary)"
 	@cd src/lib/LunTool && cargo build && cp $(CURRENT_PATH)/src/lib/LunTool/target/debug/libLunTool.* $(CURRENT_PATH)/output/lib/
 
+LibHowling:
+	@echo "Compiling Howling (Libary)"
+	@cd src/lib/Howling && cargo build && cp $(CURRENT_PATH)/src/lib/Howling/target/debug/libHowling.* $(CURRENT_PATH)/output/lib/
+
+LunSystems:
+	@echo "Compiling LunSystems"
+	@cd src/bin/LunSystems && cargo build && cp $(CURRENT_PATH)/src/bin/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/bin/
+
+HowlingInstall:
+	@echo "Compiling Howling Install"
+	@cd src/bin/HowlingInstall && cargo build && cp $(CURRENT_PATH)/src/bin/HowlingInstall/target/debug/HowlingInstall $(CURRENT_PATH)/output/bin/
 
 # Target to run the configuration menu
 menuconfig:
