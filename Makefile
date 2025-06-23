@@ -11,7 +11,7 @@ CURRENT_PATH := $(CURDIR)
 all:
 	@mkdir output
 	@echo "Running Cargo build..."
-	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/Output/
+	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/
 
 # Target to run the configuration menu
 menuconfig:
