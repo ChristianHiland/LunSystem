@@ -18,6 +18,14 @@ menu "Howling OS"
             Note this is meant for ONLY HOWLING OS SYSTEMS.
 endmenu
 
+# Sub Menu For LunSystem Software.
+menu "LunSystem Software"
+    config LTT_COMPILE_ENABLE
+        bool "LTT (LunTool Terminal)"
+        default n
+        help
+            This enables the LTT code to be compiled
+
 # Sub Menu For LunSystem Libaries.
 menu "LunSystem Libaries"
     config LIB_HOWLING_COMPILE

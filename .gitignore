@@ -1,5 +1,6 @@
 src/lib/Howling/target/
 src/bin/Howling/target/
+src/bin/LTT/target/
 src/bin/HowlingInstall/target/
 src/bin/LunSystems/target/debug/
 src/lib/LunTool/target/

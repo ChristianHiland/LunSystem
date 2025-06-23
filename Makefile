@@ -30,7 +30,8 @@ EXTRA_TARGETS += LunSystems
 # Default target: build the Rust project
 all: $(EXTRA_TARGETS)
 	@mkdir -p output/lib && mkdir -p output/bin
-	@echo "Running Cargo build..."
+	@echo "Cleaning up build files, and extra compile cache..."
+	@rm -rf output/lib/*.d
 	
 # LunSystem Targets
 Howling:
