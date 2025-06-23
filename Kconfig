@@ -16,6 +16,7 @@ menu "Howling OS"
         help
             This enables the Howling code to be compiled
             Note this is meant for ONLY HOWLING OS SYSTEMS.
+endmenu
 
 # Sub Menu For LunSystem Libaries.
 menu "LunSystem Libaries"
@@ -31,6 +32,7 @@ menu "LunSystem Libaries"
         default n
         help
             This enables the libLunTool code to be compiled.
+endmenu
 
 # Sub Menu For Target Options.
 menu "Target Options"
@@ -39,3 +41,4 @@ menu "Target Options"
         default n
         help
             This after compling the selected assets will package them into a LunPack Asset.
+endmenu
