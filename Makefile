@@ -13,9 +13,9 @@ all:
 	@echo "Running Cargo build..."
 	@echo "Compiling LunSystems"
 	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/bin/
-	@cd Howling && cargo build && cp $(CURRENT_PATH)/Howling/target/debug/libHowling $(CURRENT_PATH)/output/lib/
+	@cd Howling && cargo build && cp $(CURRENT_PATH)/Howling/target/debug/libHowling.* $(CURRENT_PATH)/output/lib/
 	@cd HowlingBin/Howling && cargo build && cp $(CURRENT_PATH)/HowlingBin/Howling/target/debug/Howling $(CURRENT_PATH)/output/bin/
-	@cd LunTool && cargo build && cp $(CURRENT_PATH)/LunTool/target/debug/libLunTool $(CURRENT_PATH)/output/lib/
+	@cd LunTool && cargo build && cp $(CURRENT_PATH)/LunTool/target/debug/libLunTool.* $(CURRENT_PATH)/output/lib/
 
 
 # Target to run the configuration menu
