@@ -8,13 +8,12 @@ KCONFIG_FILE = Kconfig
 CURRENT_PATH := $(CURDIR)
 
 # Default target: build the Rust project
-all: LunSystems
+all: 
 	@mkdir -p output/libs && mkdir -p output/bins
 	@echo "Running Cargo build..."
-	
-LunSystems:
 	@echo "Compiling LunSystems"
 	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/
+		
 
 # Target to run the configuration menu
 menuconfig:
