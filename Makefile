@@ -8,19 +8,23 @@ KCONFIG_FILE = Kconfig
 CURRENT_PATH := $(CURDIR)
 
 # Default target: build the Rust project
-all:
-	@mkdir output
+all: LunSystems
+	@mkdir -p output/libs && mkdir -p output/bins
 	@echo "Running Cargo build..."
+	
+LunSystems:
+	@echo "Compiling LunSystems"
 	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/
 
 # Target to run the configuration menu
 menuconfig:
 	@$(KCONFIG_MCONF) $(KCONFIG_FILE)
-	@echo "\nConfiguration saved in .config. Run 'make' or 'cargo build' to apply."
+	@echo "\nConfiguration saved in .config. Run 'make'"
 
 # Target to clean up Cargo and Kconfig artifacts
 clean:
-	@cargo clean
+	@cd LunSystems && cargo clean
 	@rm -f .config .config.old
+	@rm -rf output
 
 .PHONY: all clean menuconfig
