@@ -28,5 +28,10 @@ clean:
 	@cd LunSystems && cargo clean
 	@rm -f .config .config.old
 	@rm -rf output
+	@rm -rf LunTool/target/
+	@rm -rf LunSystems/target/
+	@rm -rf HowlingInstall/target/
+	@rm -rf HowlingBin/Howling/target/
+	@rm -rf Howling/target/
 
 .PHONY: all clean menuconfig
