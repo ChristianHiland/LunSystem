@@ -1,4 +1,4 @@
-# Makefile for a Rust project using Kconfig
+-include .config
 
 # The Kconfig tool for the menu interface
 KCONFIG_MCONF ?= kconfig-mconf
@@ -12,10 +12,12 @@ all:
 	@mkdir -p output/lib && mkdir -p output/bin
 	@echo "Running Cargo build..."
 	@echo "Compiling LunSystems"
-	@cd LunSystems && cargo build && cp $(CURRENT_PATH)/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/bin/
-	@cd Howling && cargo build && cp $(CURRENT_PATH)/Howling/target/debug/libHowling.* $(CURRENT_PATH)/output/lib/
-	@cd HowlingBin/Howling && cargo build && cp $(CURRENT_PATH)/HowlingBin/Howling/target/debug/Howling $(CURRENT_PATH)/output/bin/
-	@cd LunTool && cargo build && cp $(CURRENT_PATH)/LunTool/target/debug/libLunTool.* $(CURRENT_PATH)/output/lib/
+	@cd src/bin/LunSystems && cargo build && cp $(CURRENT_PATH)/src/bin/LunSystems/target/debug/LunSystems $(CURRENT_PATH)/output/bin/
+	@cd src/lib/Howling && cargo build && cp $(CURRENT_PATH)/src/lib/Howling/target/debug/libHowling.* $(CURRENT_PATH)/output/lib/
+	ifeq ($(HOWLING_INSTALL_COMPILE), y)
+		@cd src/bin/Howling && cargo build && cp $(CURRENT_PATH)/src/bin/Howling/target/debug/Howling $(CURRENT_PATH)/output/bin/
+	endif
+	@cd src/lib/LunTool && cargo build && cp $(CURRENT_PATH)/src/lib/LunTool/target/debug/libLunTool.* $(CURRENT_PATH)/output/lib/
 
 
 # Target to run the configuration menu
@@ -28,10 +30,10 @@ clean:
 	@cd LunSystems && cargo clean
 	@rm -f .config .config.old
 	@rm -rf output
-	@rm -rf LunTool/target/
-	@rm -rf LunSystems/target/
-	@rm -rf HowlingInstall/target/
-	@rm -rf HowlingBin/Howling/target/
-	@rm -rf Howling/target/
+	@rm -rf src/lib/LunTool/target/
+	@rm -rf src/bin/LunSystems/target/
+	@rm -rf src/bin/HowlingInstall/target/
+	@rm -rf src/bin/Howling/target/
+	@rm -rf src/lib/Howling/target/
 
 .PHONY: all clean menuconfig

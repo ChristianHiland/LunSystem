@@ -1,5 +1,5 @@
-Howling/target
-HowlingBin/Howling/target
-HowlingInstall/target
-LunSystems/target/debug/
-LunTool/target
+src/lib/Howling/target/
+src/bin/Howling/target/
+src/bin/HowlingInstall/target/
+src/bin/LunSystems/target/debug/
+src/lib/LunTool/target/
