@@ -1,42 +1,24 @@
-# The name of the Kconfig file
-KCONFIG_CONFIG ?= .config
-export KCONFIG_CONFIG
+# Makefile for a Rust project using Kconfig
 
-# The path to the kconfig-frontends tools
-KCONFIG_FRONTENDS_PATH ?= /usr/bin
+# The Kconfig tool for the menu interface
+KCONFIG_MCONF ?= kconfig-mconf
 
-# The main configuration file
+# The Kconfig file
 KCONFIG_FILE = Kconfig
 
-# Output directory for generated files
-AUTOCONF_H = include/autoconf.h
+# Default target: build the Rust project
+all:
+	@echo "Running Cargo build..."
+	@cargo build
 
-# Targets for the configuration menu
+# Target to run the configuration menu
 menuconfig:
-	$(KCONFIG_FRONTENDS_PATH)/kconfig-mconf $(KCONFIG_FILE)
+	@$(KCONFIG_MCONF) $(KCONFIG_FILE)
+	@echo "\nConfiguration saved in .config. Run 'make' or 'cargo build' to apply."
 
-# Include the generated configuration
--include $(KCONFIG_CONFIG)
-# Your application's source files
-SRCS = main.c
-# The final executable name
-TARGET = LunSystems
-# Compiler and flags
-CC = gcc
-CFLAGS = -Iinclude
-
-all: $(TARGET)
-
-$(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-# Generate the C header file from the .config
-$(AUTOCONF_H): $(KCONFIG_CONFIG)
-	$(KCONFIG_FRONTENDS_PATH)/kconfig-conf --sync-dependencies --olddefconfig $(KCONFIG_FILE)
-	$(KCONFIG_FRONTENDS_PATH)/kconfig-conf --write-config /dev/null --write-autoconf $@ $(KCONFIG_FILE)
-
-# Clean up generated files
+# Target to clean up Cargo and Kconfig artifacts
 clean:
-	rm -f $(TARGET) $(KCONFIG_CONFIG) $(AUTOCONF_H)
+	@cargo clean
+	@rm -f .config .config.old
 
 .PHONY: all clean menuconfig
