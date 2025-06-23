@@ -9,19 +9,19 @@ CURRENT_PATH := $(CURDIR)
 # Define a variable to hold extra, conditional targets.
 EXTRA_TARGETS :=
 
-ifeq ($(HOWLING_INSTALL_COMPILE), y)
+ifeq ($(CONFIG_HOWLING_INSTALL_COMPILE), y)
 	EXTRA_TARGETS += HowlingInstall
 endif
 
-ifeq ($(HOWLING_COMPILE), y)
+ifeq ($(CONFIG_HOWLING_COMPILE), y)
 	EXTRA_TARGETS += Howling
 endif
 
-ifeq ($(LIB_HOWLING_COMPILE), y)
+ifeq ($(CONFIG_LIB_HOWLING_COMPILE), y)
 	EXTRA_TARGETS += LibHowling
 endif
 
-ifeq ($(LIB_LUNTOOL_COMPILE), y)
+ifeq ($(CONFIG_LIB_LUNTOOL_COMPILE), y)
 	EXTRA_TARGETS += LunTool
 endif
 
