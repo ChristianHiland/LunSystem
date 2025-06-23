@@ -1,4 +1,6 @@
+use std::time::{ Duration, Instant };
 use std::process::Command;
+use std::thread::sleep;
 // Self-Made Modules.
 use math::*;
 use backend::*;
@@ -13,7 +15,25 @@ mod backend;
 /// Returns: i8(0): Done, i8(-1): Error, i8(1): Error, Continued.
 #[unsafe(no_mangle)]
 pub extern "C" fn _test() -> i8 {
-    println!("Test");
+    println!("Testing...");
+
+    sleep(Duration::new(3,0));
+    println!("[TEST] Testing init...");
+    if (__init() == 0) {
+        println!("[TEST] Init test passed!");
+    } else { println!("[TEST] Init test failed!")}
+    
+    sleep(Duration::new(3,0));
+    println!("[TEST] Testing start...");
+    if (_start() == 0) {
+        println!("[TEST] start test passed!");
+    } else { println!("[TEST] start test failed!")}
+    
+    sleep(Duration::new(3,0));
+    println!("[TEST] Testing update...");
+    if (_update() == 0) {
+        println!("[TEST] update test passed!");
+    } else { println!("[TEST] update test failed!")}
     0
 }
 
